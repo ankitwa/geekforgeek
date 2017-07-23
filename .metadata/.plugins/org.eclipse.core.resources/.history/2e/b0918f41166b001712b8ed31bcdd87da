@@ -1,0 +1,66 @@
+package algorithm.backtracking;
+
+import java.util.ArrayDeque;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+public class EquidistanceCombination {
+
+	int[] combination;
+	Set<Integer> visited=new HashSet<>();
+	int num;
+	
+	public EquidistanceCombination(int num){
+		this.num = num;
+		combination = new int[num];
+		for(int i=0; i < combination.length ; i++){
+			combination[i]=-1;
+		}
+	}
+	
+	public int[] getFreeCoupleIndex(int num){
+		for(int i=0; i < combination.length ; i++){
+			if(i + num < combination.length){
+				if(combination[i] == -1 && combination[i+num] == -1){
+					System.out.println("Return vacant index for value=" + num + " , index="+i + " ," + (i+num+1));
+					return new int[]{i,i+num+1};
+				}
+				continue;
+			}
+		}
+		return null;
+	}
+	
+	public void findCombination(int n){
+		if(this.visited.size() == num){
+			System.out.println("Found COmbiation");
+		}
+		if(n > num){
+			return;
+		}else{
+			for(int i=1; i < num ; i++ ){
+				if(!this.visited.contains(n)){
+					int[] pos = getFreeCoupleIndex(n);
+					if(pos != null){
+						this.visited.add(n);
+						combination[pos[0]] = n;
+						combination[pos[1]] = n;			
+						findCombination(n+1);
+						this.visited.add(n);
+						combination[pos[0]] = -1;
+						combination[pos[1]] = -1;
+					}
+				}
+			}
+
+		}
+	}
+	
+	
+	public static void main(String[] args){
+		EquidistanceCombination equidistanceCombination = new EquidistanceCombination(3);
+		equidistanceCombination.findCombination(1);
+	}
+	
+}

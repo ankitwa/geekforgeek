@@ -1,0 +1,60 @@
+package algorithm.backtracking;
+
+import java.util.ArrayDeque;
+import java.util.ArrayList;
+import java.util.List;
+
+public class PartitionOfKSubsumOfEqualSum {
+	
+	int[] array;
+	boolean[] visited;
+	ArrayDeque<List<Integer>> subsetOfSubsets= new ArrayDeque<>();
+	int partition;
+	
+	int SumK = -1;
+	
+	public PartitionOfKSubsumOfEqualSum(int[] array){
+		this.array = array;
+		partition = array.length / 2;
+	}
+	
+	public int sum(List<Integer> nums){
+		int sum=0;
+		for(Integer num : nums){
+			sum+=num;
+		}
+		return sum;
+	}
+	
+	public boolean foundSubSet(List<Integer> set,int index,int count){
+		boolean success=false;
+		if(count == array.length){
+			success = true;
+		}else 
+			if(set.size() == partition){
+				if(set.get(0) == array[0]){
+					SumK = sum(set);
+				}
+				if(SumK == sum(set)){
+					subsetOfSubsets.add(set);
+				}
+		}else{
+			if(index < array.length){
+				if(visited[index] == false){
+					visited[index] = true;
+					count++;
+					foundSubSet(set, index+1, count);
+					visited[index] = true;
+					count--;
+				}
+			}
+		}
+		
+		return success;
+	}
+	
+	
+	
+	
+
+}

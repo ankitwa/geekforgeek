@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<qualifiedTypeNameHistroy>
+<fullyQualifiedTypeName name="java.lang.IllegalArgumentException"/>
+<fullyQualifiedTypeName name="java.util.logging.Logger"/>
+<fullyQualifiedTypeName name="java.lang.Comparable"/>
+<fullyQualifiedTypeName name="algorithm.backtracking.Maze"/>
+<fullyQualifiedTypeName name="javax.swing.plaf.synth.SynthOptionPaneUI"/>
+<fullyQualifiedTypeName name="java.awt.List"/>
+<fullyQualifiedTypeName name="algorithm.backtracking.Board"/>
+<fullyQualifiedTypeName name="algorithm.backtracking.Queen"/>
+<fullyQualifiedTypeName name="algorithm.backtracking.SubsetSum"/>
+<fullyQualifiedTypeName name="algorithm.backtracking.SetSub"/>
+<fullyQualifiedTypeName name="algorithm.backtracking.MColoringProblem"/>
+<fullyQualifiedTypeName name="algorithm.backtracking.TugOfWar"/>
+<fullyQualifiedTypeName name="algorithm.backtracking.SudokuProblem"/>
+<fullyQualifiedTypeName name="java.util.LinkedHashSet"/>
+<fullyQualifiedTypeName name="algorithm.backtracking.Graph"/>
+<fullyQualifiedTypeName name="java.lang.Integer"/>
+<fullyQualifiedTypeName name="algorithm.backtracking.HamiltonCycleProblem"/>
+<fullyQualifiedTypeName name="java.util.HashSet"/>
+<fullyQualifiedTypeName name="algorithm.backtracking.EquidistanceCombination"/>
+<fullyQualifiedTypeName name="algorithm.backtracking.KnightTourProblem"/>
+<fullyQualifiedTypeName name="algorithm.backtracking.PositionKP"/>
+<fullyQualifiedTypeName name="algorithm.backtracking.WordBreakProblem"/>
+<fullyQualifiedTypeName name="algorithm.backtracking.RemoveInvalidParenthesis"/>
+<fullyQualifiedTypeName name="algorithm.backtracking.AllPalindromePartitian"/>
+<fullyQualifiedTypeName name="java.lang.StringBuilder"/>
+<fullyQualifiedTypeName name="java.util.List"/>
+<fullyQualifiedTypeName name="java.util.ArrayList"/>
+<fullyQualifiedTypeName name="algorithm.backtracking.PartitionOfKSubsumOfEqualSum"/>
+<fullyQualifiedTypeName name="java.util.Set"/>
+<fullyQualifiedTypeName name="algorithm.backtracking.ShortestSafeRouteLandMines"/>
+<fullyQualifiedTypeName name="java.util.ArrayDeque"/>
+<fullyQualifiedTypeName name="algorithm.backtracking.Position"/>
+<fullyQualifiedTypeName name="algorithm.backtracking.PositionLPM"/>
+<fullyQualifiedTypeName name="algorithm.backtracking.LargetPossiblePathWithHurdleInMatrix"/>
+<fullyQualifiedTypeName name="java.util.HashMap"/>
+<fullyQualifiedTypeName name="java.util.Map"/>
+<fullyQualifiedTypeName name="algorithm.backtracking.MatchAPatternWithooutRecursion"/>
+</qualifiedTypeNameHistroy>

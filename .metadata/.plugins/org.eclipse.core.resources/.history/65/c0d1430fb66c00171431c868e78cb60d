@@ -1,0 +1,39 @@
+package algorithm.backtracking;
+
+import java.util.ArrayDeque;
+
+public class AllPalindromePartitian {
+	
+	String string;
+	ArrayDeque<String> partitions = new ArrayDeque<>();
+
+	public AllPalindromePartitian(String str){
+		this.string = str;
+	}
+	
+	public void findPalindromePartition(int count,int index){
+		if(count == string.length()){
+			System.out.println(partitions);
+		}else{
+			
+			if(index < string.length()){
+			
+				for(int i=1; i <= string.length(); i++){
+					if(index+i <= string.length()){
+						partitions.add(string.substring(index,index+i));
+						findPalindromePartition(count+1, index+i-1);
+						partitions.removeLast();
+					}
+				}
+			}
+		}
+	}
+	
+	public static void main(String[] args) {
+		AllPalindromePartitian allPalindromePartitian=new AllPalindromePartitian("bcc");
+		allPalindromePartitian.findPalindromePartition(0, 0);
+	}
+	
+	
+	
+}

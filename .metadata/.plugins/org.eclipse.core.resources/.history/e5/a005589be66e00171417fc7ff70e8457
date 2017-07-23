@@ -1,0 +1,47 @@
+package algorithm.backtracking;
+
+import java.util.HashMap;
+import java.util.Map;
+
+public class MatchAPatternWithooutRecursion {
+	
+	Map<Character,String> patternMap=new HashMap<>();
+	
+	String pattern;
+	boolean[] patternVisited;
+	
+	String sentence;
+	boolean[] visitedSentence;
+	
+	public MatchAPatternWithooutRecursion(String pattern,String sentence){
+		this.pattern = pattern;
+		this.patternVisited = new boolean[pattern.length()];
+		
+		this.sentence = sentence;
+		this.visitedSentence = new boolean[pattern.length()];
+	}
+	
+	
+	
+	
+	
+	public void findMatch(int senIndex,int pattIndex){
+		if(senIndex == sentence.length && pattIndex == pattern.length){
+			System.out.println("pattern found matching..");
+		}else{
+			if(patternMap.get(pattern[pattIndex]) != null){
+				this.patternVisited[pattIndex] = true;
+				String str = patternMap.get(pattern[pattIndex]);
+				if(sentence.)
+				
+			}else{
+				for(int i=1; i <= sentence.length; i++){
+					if(this.visitedSentence[senIndex] == false){
+					
+					}
+				}
+			}
+		}
+	}
+
+}

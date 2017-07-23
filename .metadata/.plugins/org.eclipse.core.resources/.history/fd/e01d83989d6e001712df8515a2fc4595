@@ -1,0 +1,42 @@
+package algorithm.backtracking;
+
+public class ShortestSafeRouteLandMines {
+
+	private int[][] matrix;
+	int len;
+	int breadth;
+	
+	public ShortestSafeRouteLandMines(int[][] matrix){
+		this.matrix = matrix;
+		this.breadth = matrix.length;
+		this.len = matrix[0].length;
+		
+	}
+	
+	private void markUnsafeCell(){
+		for(int i=0; i < matrix.length ; i++){
+			for(int j=0;  j < matrix[0].length; i++){
+				if(matrix[i][j] == 0){
+					markUnsafeAdjacentCell(i,j);
+				}
+			}
+		}
+	}
+	
+	private void markUnsafeAdjacentCell(int x,int y){
+		// forward
+		if(x >= 0 && x < breadth && y >= 0 && (y+1) < len){
+			this.matrix[x][y+1] = -1; 
+		}
+		// backward
+		if(x >= 0 && x < breadth && (y-1) >= 0 && (y-1) < len){
+			this.matrix[x][y-1] = -1; 
+		}
+		if(x >= 0 && x < breadth && y >= 0 && (y+1) < len){
+			this.matrix[x][y] = -1; 
+		}
+		if(x >= 0 && x < breadth && y >= 0 && (y+1) < len){
+			this.matrix[x][y] = -1; 
+		}
+	}
+}

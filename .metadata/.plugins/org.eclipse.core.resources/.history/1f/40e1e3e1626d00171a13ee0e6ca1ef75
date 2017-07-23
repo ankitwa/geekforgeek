@@ -1,0 +1,15 @@
+package algorithm.backtracking;
+
+public class PartitionOfKSubsumOfEqualSum {
+	
+	int[] array;
+	boolean[] visited;
+	
+	public PartitionOfKSubsumOfEqualSum(int[] array){
+		this.array = array;
+	}
+	
+	
+	
+
+}

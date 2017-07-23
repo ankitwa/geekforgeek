@@ -1,0 +1,188 @@
+package algorithm.backtracking;
+
+import java.util.ArrayDeque;
+
+class PositionLM{
+	int x;
+	int y;
+	
+	public PositionLM(int x,int y) {
+		this.x = x;
+		this.y = y;
+	}
+
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + x;
+		result = prime * result + y;
+		return result;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PositionLM other = (PositionLM) obj;
+		if (x != other.x)
+			return false;
+		if (y != other.y)
+			return false;
+		return true;
+	}
+
+	@Override
+	public String toString() {
+		return "PositionLM [x=" + x + ", y=" + y + "]";
+	}
+}
+
+
+public class ShortestSafeRouteLandMines {
+
+	private int[][] matrix;
+	int len;
+	int breadth;
+	
+	ArrayDeque<Position> finalSol = new ArrayDeque<>();
+	ArrayDeque<Position> solution=new ArrayDeque<>();
+	
+	int minPath = Integer.MAX_VALUE;
+	
+	public ShortestSafeRouteLandMines(int[][] matrix){
+		this.matrix = matrix;
+		this.breadth = matrix.length;
+		this.len = matrix[0].length;
+		markUnsafeCell();
+		printMatrix();
+	}
+	
+	public void printMatrix(){
+		for(int i=0; i < breadth ; i++){
+			for(int j=0; j < len ; j++){
+				System.out.print(matrix[i][j] + " ");
+			}
+			System.out.println();
+		}
+	}
+	
+	
+	private void markUnsafeCell(){
+		for(int i=0; i < matrix.length ; i++){
+			for(int j=0;  j < matrix[0].length; j++){
+				if(matrix[i][j] == 0){
+					markUnsafeAdjacentCell(i,j);
+				}
+			}
+		}
+	}
+	
+	private void markUnsafeAdjacentCell(int x,int y){
+		// forward
+		if(x >= 0 && x < breadth && y >= 0 && (y+1) < len){
+			this.matrix[x][y+1] = -1; 
+		}
+		// backward
+		if(x >= 0 && x < breadth && (y-1) >= 0 && (y-1) < len){
+			this.matrix[x][y-1] = -1; 
+		}
+		// below
+		if((x + 1) >= 0 && (x + 1) < breadth && y >= 0 && (y) < len){
+			this.matrix[x+1][y] = -1; 
+		}
+		// Above
+		if((x-1) >= 0 && (x-1) < breadth && y >= 0 && y < len){
+			this.matrix[x-1][y] = -1; 
+		}
+	}
+	
+	public void findPath(int x,int y){
+		if(y == len-1){
+			System.out.println("Found Path");
+			if(solution.size() < minPath){
+				minPath = solution.size();
+				finalSol = solution.clone();
+				System.out.println("Final Sol =" + finalSol);
+			}
+		}else{
+				if(this.matrix[x][y] != -2 && this.matrix[x][y] != -1 && this.matrix[x][y] != 0 ){
+					
+					// for below
+					if((x >= 0 && x + 1 < breadth) && y >= 0 && y < len){
+						this.matrix[x+1][y] = -2;
+						solution.addLast(new Position(x+1, y));
+						findPath(x+1, y);
+						this.matrix[x+1][y] = 1;
+						solution.removeLast();
+					}
+					
+					// for above
+					if((x -1 >= 0 && x - 1 < breadth) && y >= 0 && y < len){
+						this.matrix[x-1][y] = -2;
+						solution.addLast(new Position(x-1, y));
+						findPath(x-1, y);
+						this.matrix[x-1][y] = 1;
+						solution.removeLast();
+					}
+					
+					// for forward
+					if((x >= 0 && x  < breadth) && y + 1 >= 0 && y + 1 < len){
+						this.matrix[x][y+1] = -2;
+						solution.addLast(new Position(x, y+1));
+						findPath(x, y+1);
+						this.matrix[x][y+1] = 1;
+						solution.removeLast();
+					}
+					
+					// for back
+					if((x >= 0 && x < breadth) && y -1  >= 0 && y-1 < len){
+						this.matrix[x][y-1] = -2;
+						solution.addLast(new Position(x, y-1));
+						findPath(x, y-1);
+						this.matrix[x][y-1] = 1;
+						solution.removeLast();
+					}
+				}else{
+					System.out.println("Already Visited : x=" + x + ", y=" + y);
+				}
+			
+		}
+	}
+	
+	public void findSol(){
+		for(int i=0; i < breadth ; i++){
+			this.matrix[0][i] = -2;
+			findPath(0, i);
+			this.matrix[0][i] = 1;
+		}
+	}
+	
+	public static void main(String[] args) {
+		
+		 int[][] mat =
+			    {
+			        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+			        { 1, 0, 1, 1, 1, 1, 1, 1, 1, 1 },
+			        { 1, 1, 1, 0, 1, 1, 1, 1, 1, 1 },
+			        { 1, 1, 1, 1, 0, 1, 1, 1, 1, 1 },
+			        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+			        { 1, 1, 1, 1, 1, 0, 1, 1, 1, 1 },
+			        { 1, 0, 1, 1, 1, 1, 1, 1, 0, 1 },
+			        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+			        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+			        { 0, 1, 1, 1, 1, 0, 1, 1, 1, 1 },
+			        { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 },
+			        { 1, 1, 1, 0, 1, 1, 1, 1, 1, 1 }
+			    };
+		
+		ShortestSafeRouteLandMines safeRouteLandMines = new ShortestSafeRouteLandMines(mat);
+		safeRouteLandMines.findSol();
+	}
+	
+	
+}

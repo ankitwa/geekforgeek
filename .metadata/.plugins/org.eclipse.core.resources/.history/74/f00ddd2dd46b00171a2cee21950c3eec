@@ -1,0 +1,163 @@
+package algorithm.backtracking;
+
+import java.util.ArrayList;
+import java.util.List;
+
+class PositionKP{
+	
+	int x;
+	int y;
+	
+	
+	
+	public PositionKP(int x, int y) {
+		super();
+		this.x = x;
+		this.y = y;
+	}
+	public int getX() {
+		return x;
+	}
+	public void setX(int x) {
+		this.x = x;
+	}
+	public int getY() {
+		return y;
+	}
+	public void setY(int y) {
+		this.y = y;
+	}
+	@Override
+	public String toString() {
+		return "PositionKP [x=" + x + ", y=" + y + "]";
+	}
+	@Override
+	public int hashCode() {
+		final int prime = 31;
+		int result = 1;
+		result = prime * result + x;
+		result = prime * result + y;
+		return result;
+	}
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		PositionKP other = (PositionKP) obj;
+		if (x != other.x)
+			return false;
+		if (y != other.y)
+			return false;
+		return true;
+	}
+	
+}
+
+public class KnightTourProblem {
+
+	int[][] matrix;
+	
+	int size;
+	
+	List<PositionKP> visitedPositions=new ArrayList<>();
+	
+	public KnightTourProblem(int size) {
+		this.matrix=new int[size][size];
+		this.size = size;
+	}
+	
+	
+	public boolean isValidPosition(PositionKP positionKP){
+		if(matrix[positionKP.getX()][positionKP.getY()] == -1
+				&& (positionKP.getX() >= 0 && positionKP.getY() >= 0) 
+				&& (positionKP.getX() < size && positionKP.getY() < size)){
+			return true;
+		}
+		return false;
+	}
+	
+	
+	public List<PositionKP> getAvailblePositionForMove(PositionKP position){
+		PositionKP pos1 = new PositionKP(position.getX() + 2, position.getY() + 1);
+		PositionKP pos2 = new PositionKP(position.getX() + 2, position.getY() - 1);
+		PositionKP pos3 = new PositionKP(position.getX() - 2, position.getY() + 1);
+		PositionKP pos4 = new PositionKP(position.getX() - 2, position.getY() - 1);
+		
+		PositionKP pos5 = new PositionKP(position.getX() + 1, position.getY() + 2);
+		PositionKP pos6 = new PositionKP(position.getX() - 1, position.getY() + 2);
+		PositionKP pos7 = new PositionKP(position.getX() + 1, position.getY() - 2);
+		PositionKP pos8 = new PositionKP(position.getX() - 1, position.getY() - 2);
+		
+		List<PositionKP> positions = new ArrayList<>();
+		if(isValidPosition(pos1)){
+			positions.add(pos1);
+		}
+		
+		if(isValidPosition(pos2)){
+			positions.add(pos2);
+		}
+		if(isValidPosition(pos3)){
+			positions.add(pos3);
+		}
+		if(isValidPosition(pos4)){
+			positions.add(pos4);
+		}
+		if(isValidPosition(pos5)){
+			positions.add(pos5);
+		}
+		if(isValidPosition(pos6)){
+			positions.add(pos6);
+		}
+		if(isValidPosition(pos7)){
+			positions.add(pos7);
+		}
+		if(isValidPosition(pos8)){
+			positions.add(pos8);
+		}
+		
+		return positions;
+	}
+	
+	public void findKnightTour(PositionKP start,int count){
+		
+		if(visitedPositions.size() == size*size){
+			System.out.println("Found Knight Tour Path");
+			printMatrix();
+		}
+		if(matrix[start.getX()][start.getY()] != -1){
+			return;
+		}else{
+			List<PositionKP> positionKPs = getAvailblePositionForMove(start);
+			if(!positionKPs.isEmpty()){
+				matrix[start.getX()][start.getY()] = count;
+				this.visitedPositions.add(start);
+				for(PositionKP positionKP : positionKPs){
+					findKnightTour(positionKP, count+1);
+				}
+				matrix[start.getX()][start.getY()] = -1;
+				this.visitedPositions.remove(start);
+			}
+		}
+	}
+	
+	
+	public void printMatrix(){
+		for(int i=0 ; i < size ; i++){
+			for(int j=0; j < size ; j++){
+				System.out.println(matrix[i][j] + " ");
+			}
+			System.out.println();
+		}
+	}
+		
+	
+	public static void main(String[] args) {
+		KnightTourProblem kn=new KnightTourProblem(8);
+		kn.findKnightTour(new PositionKP(0, 0),0);
+	}
+
+}

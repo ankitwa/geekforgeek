@@ -1,0 +1,64 @@
+package algorithm.backtracking;
+
+public class RemoveInvalidParenthesis {
+	
+	char[] expresion;
+	boolean[] present;
+	
+	public RemoveInvalidParenthesis(String expr){
+		this.expresion = expr.toCharArray();
+		present = new boolean[expr.length()];
+		for(int i=0; i < present.length ; i++){
+			present[i]=true;
+		}
+	}
+	
+	public void printSoln(){
+		for(int i=0; i < expresion.length ; i++){
+			if(present[i] == true){
+				System.out.print(expresion[i]);
+			}
+		}
+		System.out.println();
+	}
+	
+	public boolean checkValidExpr(){
+		System.out.println("checking validatoin for");
+		printSoln();
+		int count=0;
+		for(int i=0; i < expresion.length ; i++){
+			if(present[i] == true){
+				if(expresion[i] == '('){
+					count++;
+				}else if(expresion[i] == ')'){
+					count--;
+				}
+				if(count < 0){
+					return false;
+				}
+			}
+		}
+		return count == 0;
+	}
+	
+	
+	public void findValidExpr(){
+		
+		if(checkValidExpr()){
+			printSoln();
+			
+		}else{
+			for(int i=0; i < expresion.length ; i++){
+				present[i] = false;
+				findValidExpr();
+				present[i] = true;
+			}
+		}
+	}
+	
+	public static void main(String[] args) {
+		RemoveInvalidParenthesis removeInvalidParenthesis=new RemoveInvalidParenthesis("()())()");
+		removeInvalidParenthesis.findValidExpr();
+	}
+
+}

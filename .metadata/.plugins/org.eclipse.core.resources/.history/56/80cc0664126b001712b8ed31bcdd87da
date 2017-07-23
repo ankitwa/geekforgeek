@@ -1,0 +1,87 @@
+package algorithm.backtracking;
+
+import java.util.ArrayDeque;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+public class EquidistanceCombination {
+
+	int[] combination;
+	Set<Integer> visited=new HashSet<>();
+	int num;
+	
+	public EquidistanceCombination(int num){
+		this.num = num;
+		combination = new int[num];
+		for(int i=0; i < combination.length ; i++){
+			combination[i]=1;
+		}
+	}
+	
+	public int[] getFreeCoupleIndex(int num){
+		for(int i=0; i < combination.length ; i++){
+			if(i + num < combination.length){
+				if(combination[i] == -1 && combination[i+num] == -1){
+					System.out.println("Return vacant index for value=" + num + " , index="+i + " ," + (i+num));
+					return new int[]{i,i+num};
+				}
+				continue;
+			}
+		}
+		return null;
+	}
+	
+	public void findCombination(int n){
+		if(this.visited.size() == num){
+			System.out.println("Found COmbiation");
+		}
+		if(n > num){
+			return;
+		}else{
+			for(int i=1; i < num ; i++ ){
+				if(!this.visited.contains(n)){
+					int[] pos = getFreeCoupleIndex(n);
+					combination[pos[0]] = n;
+					combination[pos[1]] = n;			
+					findCombiantion(n+1);
+					
+					combination[pos[0]] = -1;
+					combination[pos[1]] = -1;
+				}
+			}
+
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	public void findCombiantion(int index){
+		if(combination.size() == num*2){
+			System.out.println(combination);
+			return;
+		}else{
+			if(!this.visited.contains(index)){
+				combination.add(index);
+				for(int i=index;i < num ; i++){
+				   combination.add(i+1);
+				   combination.add(index);
+				   if(isPropertySatisfiedForNum(index)){
+					   this.visited.add(index);
+				   }else{
+					   
+				   }
+				}
+			}
+		}
+		
+	}
+	
+	
+	
+	
+}
